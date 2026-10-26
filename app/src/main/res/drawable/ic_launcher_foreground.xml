@@ -88,13 +88,4 @@
         android:strokeWidth="2.0"
         android:strokeLineCap="round"
         android:pathData="M49,43 L49,46 M59,43 L59,46" />
-
-    <!-- Dígitos "6" y "1" estilizados en el centro del calendario -->
-    <path
-        android:fillColor="#00000000"
-        android:strokeColor="#FFFFFF"
-        android:strokeWidth="1.8"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round"
-        android:pathData="M52,52 L48,52 L48,59 L52,59 L52,55.5 L48,55.5 M58,52 L58,59" />
 </vector>

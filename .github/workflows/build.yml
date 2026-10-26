@@ -42,6 +42,9 @@ jobs:
             echo "Error: No se encontró el binario compilado en $APP_PATH"
             exit 1
           fi
+          /usr/libexec/PlistBuddy -c "Set :CFBundleDisplayName 'Calculador de Turnos'" "$APP_PATH/Info.plist" || \
+          /usr/libexec/PlistBuddy -c "Add :CFBundleDisplayName string 'Calculador de Turnos'" "$APP_PATH/Info.plist"
+          /usr/libexec/PlistBuddy -c "Set :CFBundleName 'Calculador de Turnos'" "$APP_PATH/Info.plist" || true
           mkdir -p Payload
           cp -r "$APP_PATH" Payload/
           zip -r CalculadorTurnos.ipa Payload
