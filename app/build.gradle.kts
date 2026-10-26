@@ -11,19 +11,42 @@ android {
         applicationId = "com.antigravity.calculadorturnos"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.1.0"
 
         vectorDrawables {
             useSupportLibrary = true
         }
     }
 
+    signingConfigs {
+        create("release") {
+            val keystoreFile = file("release-key.jks")
+            if (keystoreFile.exists()) {
+                storeFile = keystoreFile
+                storePassword = System.getenv("KEYSTORE_PASSWORD") ?: "Calculador2026!"
+                keyAlias = System.getenv("KEY_ALIAS") ?: "calculadorturnos"
+                keyPassword = System.getenv("KEY_PASSWORD") ?: "Calculador2026!"
+                enableV1Signing = true
+                enableV2Signing = true
+                enableV3Signing = true
+            }
+        }
+    }
+
     buildTypes {
+        debug {
+            signingConfig = signingConfigs.getByName("debug")
+        }
         release {
             isMinifyEnabled = false
-            // En caso de compilar assembleRelease sin keystore externa, usa firma debug
-            signingConfig = signingConfigs.getByName("debug")
+            isDebuggable = false
+            val keystoreFile = file("release-key.jks")
+            signingConfig = if (keystoreFile.exists()) {
+                signingConfigs.getByName("release")
+            } else {
+                signingConfigs.getByName("debug")
+            }
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

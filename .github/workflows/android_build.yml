@@ -22,28 +22,40 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: 3. Configurar caché de Gradle
+      - name: 3. Generar Keystore de Release (Firma V1 + V2 + V3)
+        run: |
+          if [ ! -f app/release-key.jks ]; then
+            keytool -genkeypair -v \
+              -keystore app/release-key.jks \
+              -keyalg RSA \
+              -keysize 2048 \
+              -validity 10000 \
+              -alias calculadorturnos \
+              -storepass "Calculador2026!" \
+              -keypass "Calculador2026!" \
+              -dname "CN=Calculador de Turnos, OU=Mobile, O=Antigravity, L=BuenosAires, S=BA, C=AR"
+          fi
+
+      - name: 4. Configurar caché de Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.7'
 
-      - name: 4. Conceder permisos de ejecución a gradlew
+      - name: 5. Conceder permisos de ejecución a gradlew
         run: |
           sed -i 's/\r$//' gradlew
           chmod +x gradlew
 
-      - name: 5. Compilar APK (Debug y Release listos para instalar)
-        run: ./gradlew assembleDebug assembleRelease --no-daemon
+      - name: 6. Compilar APK firmada en modo Release
+        run: ./gradlew assembleRelease --no-daemon
 
-      - name: 6. Preparar archivo APK final
+      - name: 7. Preparar archivo APK final
         run: |
           cp app/build/outputs/apk/release/app-release.apk CalculadorTurnos.apk
 
-      - name: 7. Subir APK como Artifact de GitHub Actions
+      - name: 8. Subir APK como Artifact de GitHub Actions
         uses: actions/upload-artifact@v4
         with:
           name: CalculadorTurnos-Android-APK
-          path: |
-            CalculadorTurnos.apk
-            app/build/outputs/apk/debug/app-debug.apk
+          path: CalculadorTurnos.apk
           retention-days: 30
