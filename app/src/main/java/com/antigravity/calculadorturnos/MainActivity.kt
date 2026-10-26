@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -126,27 +127,28 @@ fun ShiftCalculatorScreen() {
         modifier = Modifier
             .fillMaxSize()
             .background(PureBlack)
+            .systemBarsPadding()
             .verticalScroll(rememberScrollState())
-            .padding(horizontal = 24.dp, vertical = 36.dp),
+            .padding(start = 24.dp, end = 24.dp, top = 28.dp, bottom = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // 1. LOGOTIPO VECTORIAL MINIMALISTA 6x1
+        // 1. LOGOTIPO OFICIAL 6x1
         Box(
             modifier = Modifier
-                .size(96.dp)
-                .clip(RoundedCornerShape(22.dp))
-                .border(BorderStroke(1.5.dp, PureWhite), RoundedCornerShape(22.dp))
+                .size(88.dp)
+                .clip(RoundedCornerShape(20.dp))
+                .border(BorderStroke(1.5.dp, PureWhite), RoundedCornerShape(20.dp))
                 .background(PureBlack),
             contentAlignment = Alignment.Center
         ) {
             Image(
                 painter = painterResource(id = R.drawable.app_logo),
                 contentDescription = "Logotipo Calculador de Turnos",
-                modifier = Modifier.size(92.dp)
+                modifier = Modifier.size(84.dp)
             )
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(14.dp))
 
         Text(
             text = "CALCULADOR DE TURNOS",
@@ -163,7 +165,7 @@ fun ShiftCalculatorScreen() {
             fontSize = 12.sp,
             letterSpacing = 1.5.sp,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(top = 4.dp, bottom = 28.dp)
+            modifier = Modifier.padding(top = 4.dp, bottom = 22.dp)
         )
 
         // 2. SELECTOR DE FECHA DE REFERENCIA
