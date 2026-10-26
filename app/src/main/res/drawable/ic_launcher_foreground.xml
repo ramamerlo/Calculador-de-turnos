@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Anillo circular exterior de rotación -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.8"
+        android:pathData="M54,24 A30,30 0 1,1 53.9,24 Z" />
+
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.6"
+        android:pathData="M54,28 A26,26 0 1,1 53.9,28 Z" />
+
+    <!-- 4 Puntas de flecha de rotación en los puntos cardinales -->
+    <!-- Superior (apuntando a la derecha) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M52,21 L60,26 L52,31 Z" />
+    <!-- Derecha (apuntando hacia abajo) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M77,52 L82,60 L87,52 Z" />
+    <!-- Inferior (apuntando a la izquierda) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M56,77 L48,82 L56,87 Z" />
+    <!-- Izquierda (apuntando hacia arriba) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M21,56 L26,48 L31,56 Z" />
+
+    <!-- Líneas divisorias de los 4 cuadrantes de turno -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.5"
+        android:pathData="M54,31 L54,43 M54,65 L54,77 M31,54 L43,54 M65,54 L77,54" />
+
+    <!-- Ícono Sol (Cuadrante Superior Derecho - Tarde) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M65,41 A4,4 0 1,1 64.9,41 Z" />
+
+    <!-- Ícono Amanecer (Cuadrante Superior Izquierdo - Mañana) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M39,43 A4,4 0 0,1 47,43 Z" />
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.3"
+        android:pathData="M37,44.5 L49,44.5" />
+
+    <!-- Ícono Atardecer (Cuadrante Inferior Derecho - Vespertino) -->
+    <path
+        android:fillColor="#B0B0B0"
+        android:pathData="M61,67 A4,4 0 0,1 69,67 Z" />
+    <path
+        android:strokeColor="#B0B0B0"
+        android:strokeWidth="1.3"
+        android:pathData="M59,68.5 L71,68.5" />
+
+    <!-- Ícono Luna (Cuadrante Inferior Izquierdo - Noche) -->
+    <path
+        android:fillColor="#CCCCCC"
+        android:pathData="M44,61 A4.5,4.5 0 1,0 48,67 A3.5,3.5 0 1,1 44,61 Z" />
+
+    <!-- Calendario central 6x1 -->
+    <path
+        android:fillColor="#000000"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.0"
+        android:pathData="M45,45 L63,45 A2,2 0 0,1 65,47 L65,61 A2,2 0 0,1 63,63 L45,63 A2,2 0 0,1 43,61 L43,47 A2,2 0 0,1 45,45 Z" />
+
+    <!-- Cabecera blanca del calendario -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M44,45 L64,45 L64,49.5 L44,49.5 Z" />
+
+    <!-- Anillas superiores del calendario -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.0"
+        android:strokeLineCap="round"
+        android:pathData="M49,43 L49,46 M59,43 L59,46" />
+
+    <!-- Dígitos "6" y "1" estilizados en el centro del calendario -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M52,52 L48,52 L48,59 L52,59 L52,55.5 L48,55.5 M58,52 L58,59" />
+</vector>

@@ -1,0 +1,49 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build-android:
+    name: Compilar APK con Gradle y JDK 17
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. Descargar código fuente (Checkout)
+        uses: actions/checkout@v4
+
+      - name: 2. Configurar JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: 3. Configurar caché de Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.7'
+
+      - name: 4. Conceder permisos de ejecución a gradlew
+        run: |
+          sed -i 's/\r$//' gradlew
+          chmod +x gradlew
+
+      - name: 5. Compilar APK (Debug y Release listos para instalar)
+        run: ./gradlew assembleDebug assembleRelease --no-daemon
+
+      - name: 6. Preparar archivo APK final
+        run: |
+          cp app/build/outputs/apk/release/app-release.apk CalculadorTurnos.apk
+
+      - name: 7. Subir APK como Artifact de GitHub Actions
+        uses: actions/upload-artifact@v4
+        with:
+          name: CalculadorTurnos-Android-APK
+          path: |
+            CalculadorTurnos.apk
+            app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 30

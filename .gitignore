@@ -6,11 +6,19 @@ Payload/
 *.xcodeproj/project.xcworkspace/
 *.xcodeproj/xcuserdata/
 
+# Android / Gradle Build
+.gradle/
+app/build/
+local.properties
+*.apk
+*.aab
+
 # Python
 __pycache__/
 *.py[cod]
 .venv/
 
-# OS
+# OS / IDE
 .DS_Store
 Thumbs.db
+.idea/
