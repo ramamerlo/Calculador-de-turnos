@@ -1,0 +1,54 @@
+name: Build Unsigned iOS IPA
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build-ios:
+    name: Compilar y Empaquetar .ipa (Sin Firma)
+    runs-on: macos-latest
+
+    steps:
+      - name: 1. Descargar código fuente (Checkout)
+        uses: actions/checkout@v4
+
+      - name: 2. Generar proyecto Xcode (.xcodeproj) con XcodeGen
+        run: |
+          if ! command -v xcodegen &> /dev/null; then
+            brew install xcodegen
+          fi
+          xcodegen generate
+
+      - name: 3. Compilar aplicación en modo Release (Sin firma)
+        run: |
+          xcodebuild clean build \
+            -project CalculadorTurnos.xcodeproj \
+            -scheme CalculadorTurnos \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: 4. Empaquetar .app dentro de Payload y comprimir a .ipa
+        run: |
+          APP_PATH="build/Build/Products/Release-iphoneos/CalculadorTurnos.app"
+          if [ ! -d "$APP_PATH" ]; then
+            echo "Error: No se encontró el binario compilado en $APP_PATH"
+            exit 1
+          fi
+          mkdir -p Payload
+          cp -r "$APP_PATH" Payload/
+          zip -r CalculadorTurnos.ipa Payload
+
+      - name: 5. Subir archivo .ipa como Artifact de GitHub Actions
+        uses: actions/upload-artifact@v4
+        with:
+          name: CalculadorTurnos-iOS-IPA
+          path: CalculadorTurnos.ipa
+          retention-days: 30

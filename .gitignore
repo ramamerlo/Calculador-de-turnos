@@ -1,0 +1,16 @@
+# Xcode / iOS Build
+build/
+DerivedData/
+Payload/
+*.ipa
+*.xcodeproj/project.xcworkspace/
+*.xcodeproj/xcuserdata/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db
